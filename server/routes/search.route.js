@@ -11,12 +11,12 @@ const router = express.Router();
 
 router.post('/',  async (req, res) => {
     console.log('req', req)
-    const symbol = req.body.symbol.toUpperCase()
+    const symbol = req.body.symbol
     console.log('sym', symbol)
   
     try {
       const response = await axios.get(`${BASE_URL}/quote?symbol=${symbol}&token=${process.env.REACT_APP_FINNHUB_API_KEY}`)
-      console.log('response', response)
+      console.log('This is the C response', response.data)
       const data = {
         currentPrice: response.data.c, 
         change: response.data.d,
