@@ -3,8 +3,9 @@ import axios from 'axios';
 
 function* fetchStockData(action) {
     try {
-     const response = yield axios.post('/api/stock/', action.payload);
-     yield put({ 
+      const response = yield axios.post('/api/stock/', action.payload);
+      // const response = yield axios.get(`/api/stock?symbol=${action.payload}`);
+      yield put({ 
         type: 'FETCH_STOCK_DATA_SUCCESS', 
         payload: response.data });
     } catch (error) {

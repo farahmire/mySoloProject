@@ -4,6 +4,8 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
+import Watchlist from "../WatchList/WatchList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +37,10 @@ const Search = () => {
   const stockData = useSelector((state) => state.stockData.currentPrice);
   const dispatch = useDispatch();
   const [symbol, setSymbol] = useState("");
+  // const [currency, setCurrency] = useState("");
+  // const [description, setDescription] = useState("");
+  // const [bought, setBought] = useState("");
+
   const classes = useStyles();
 
   const handleSubmit = (event) => {
@@ -49,13 +55,10 @@ const Search = () => {
 
   const handleAddToWatchlist = () => {
     dispatch({
-      type: "ADD_TO_WATCHLIST",
-      payload: {
-        symbol,
-        name: "stock name", // You'll need to get the stock name from somewhere
-        currentPrice: stockData,
-      },
-    });
+      type: 'SET_WATCHLIST',
+      payload: symbol
+    })
+
   };
 
   return (
@@ -81,6 +84,7 @@ const Search = () => {
           Add to Watchlist
         </Button>
       </Box>
+      
     </div>
   );
 };

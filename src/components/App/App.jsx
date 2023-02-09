@@ -19,6 +19,7 @@ import Search from '../Search/Search';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import Watchlist from '../WatchList/WatchList';
 
 import './App.css';
 
@@ -61,11 +62,19 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
+            // logged in shows SearchPage else shows SearchPage
             exact
-            path="/info"
+            path="/search"
           >
             <Search />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows SearchPage else shows SearchPage
+            exact
+            path="/watchlist"
+          >
+            <Watchlist />
           </ProtectedRoute>
 
           <Route

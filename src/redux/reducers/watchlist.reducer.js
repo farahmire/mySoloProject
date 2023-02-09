@@ -1,14 +1,15 @@
 
-    const watchlistReducer = (state = [], action) => {
+const setWatchlistReducer = (state = [], action) => {
     switch (action.type) {
-    case "ADD_TO_WATCHLIST":
-    return {
-    ...state,
-    watchlist: [...state.watchlist, action.payload]
-    };
-    default:
-    return state;
+      case "SET_WATCHLIST_SUCCESS":
+        return action.payload;
+      default:
+        return state;
     }
-    };
-    
-    export default watchlistReducer;
+  };
+
+
+
+  export default setWatchlistReducer;
+
+ 
