@@ -10,7 +10,7 @@ const router = express.Router();
 
 
 router.post('/',  async (req, res) => {
-    console.log('req', req)
+
     const symbol = req.body.symbol
     console.log('sym', symbol)
   

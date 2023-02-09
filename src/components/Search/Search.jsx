@@ -58,7 +58,7 @@ const Search = () => {
       type: 'SET_WATCHLIST',
       payload: symbol
     })
-
+console.log("THIS IS THE DISPATCH SET WATCLIST")
   };
 
   return (

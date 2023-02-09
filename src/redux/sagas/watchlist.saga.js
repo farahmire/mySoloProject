@@ -1,9 +1,11 @@
-import { put, takeEvery } from "redux-saga/effects";
+import { put, takeEvery, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 
 function* setWatchListSaga(action) {
   try {
-    const response = yield axios.get("/api/watchlist/", action.payload);
+    console.log("THIS IS THE SET WATCHLIST SAGA PAYLOAD", action.payload)
+    const response = yield axios.post("/api/watchlist/", {symbol: action.payload});
+    console.log('RESPONSE for SET WATCHLIST SAGA', response.data)
     yield put({
       type: "SET_WATCHLIST_SUCCESS",
       payload: response.data,
@@ -16,7 +18,9 @@ function* setWatchListSaga(action) {
 function* fetchWatchlistSaga(action) {
   // POST /api/watchlist {symbol: 'AAPL'}
   try {
-    const response = yield axios.post("/api/watchlist/", action.payload);
+    console.log("THIS IS THE FETCH SAGA PAYLOAD", action.payload)
+
+    const response = yield axios.get("/api/watchlist/", {symbol: action.payload});
     yield put({
       type: "FETCH_WATCHLIST_SUCCESS",
       payload: response.data,
@@ -27,8 +31,8 @@ function* fetchWatchlistSaga(action) {
 }
 
 function* watchListSaga() {
-  yield takeEvery("SET_WATCHLIST", setWatchListSaga);
-  yield takeEvery("FETCH_WATCHLIST", fetchWatchlistSaga);
+  yield takeLatest("SET_WATCHLIST", setWatchListSaga);
+  yield takeLatest("FETCH_WATCHLIST", fetchWatchlistSaga);
 
 }
 

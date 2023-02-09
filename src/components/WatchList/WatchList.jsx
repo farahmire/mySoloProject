@@ -9,14 +9,10 @@ const Watchlist = () => {
 
   // Fetch the current watchlist data from the server
   useEffect(() => {
+   
     dispatch({
         type: "FETCH_WATCHLIST",
-        payload: {
-          currency,
-          description,
-          symbol,
-          bought,
-        },
+     
       });
     }, []);
 
@@ -32,7 +28,7 @@ const Watchlist = () => {
       </thead>
       <tbody>
         
-        {watchlist.map((stock) => (
+        {watchlist ? watchlist.map((stock) => (
           <tr key={stock.id}>
             <td>{stock.symbol}</td>
             <td>{stock.currency}</td>
@@ -41,7 +37,7 @@ const Watchlist = () => {
             <td>{stock.bought}</td>
 
           </tr>
-        ))}
+        )): null}
       </tbody>
     </table>
   );
