@@ -4,25 +4,26 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router-dom";
-import Watchlist from "../WatchList/WatchList";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-start",
     height: "100vh",
-    backgroundColor: "#FFA726",
+    backgroundColor: "#333",
   },
   formContainer: {
     backgroundColor: "#333",
     padding: theme.spacing(2),
     borderRadius: "5px",
     color: "#fff",
+    alignSelf: "flex-start",
   },
   textField: {
     marginBottom: theme.spacing(2),
+    color: "white"
   },
   currentPriceContainer: {
     backgroundColor: "#333",
@@ -30,11 +31,12 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
     borderRadius: "5px",
     marginTop: theme.spacing(2),
+    alignSelf: "center",
   },
 }));
 
 const Search = () => {
-  const stockData = useSelector((state) => state.stockData.currentPrice);
+  const stockData = useSelector((store) => store.stockData.currentPrice);
   const dispatch = useDispatch();
   const [symbol, setSymbol] = useState("");
   // const [currency, setCurrency] = useState("");
@@ -55,10 +57,10 @@ const Search = () => {
 
   const handleAddToWatchlist = () => {
     dispatch({
-      type: 'SET_WATCHLIST',
-      payload: symbol
-    })
-console.log("THIS IS THE DISPATCH SET WATCLIST")
+      type: "SET_WATCHLIST",
+      payload: symbol,
+    });
+    console.log("THIS IS THE DISPATCH SET WATCLIST");
   };
 
   return (
@@ -73,18 +75,25 @@ console.log("THIS IS THE DISPATCH SET WATCLIST")
             className={classes.textField}
             fullWidth
           />
-          <Button type="submit" variant="contained">
+          <Button
+            type="submit"
+            variant="contained"
+            style={{ backgroundColor: "#FFA726" }}
+          >
             Look Up Stock
           </Button>
         </form>
       </Box>
       <Box className={classes.currentPriceContainer}>
         <h2>Current Price is: ${stockData}</h2>
-        <Button variant="contained" onClick={handleAddToWatchlist}>
+        <Button
+          variant="contained"
+          onClick={handleAddToWatchlist}
+          style={{ backgroundColor: "#FFA726" }}
+        >
           Add to Watchlist
         </Button>
       </Box>
-      
     </div>
   );
 };

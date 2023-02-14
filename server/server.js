@@ -11,6 +11,7 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const stockRouter = require('./routes/search.route');
 const watchListRouter = require('./routes/watchlist.router')
+const chartRouter = require('./routes/chart.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -27,6 +28,8 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/stock', stockRouter);
 app.use('/api/watchlist', watchListRouter);
+app.use('/api/charts', chartRouter);
+
 
 
 
