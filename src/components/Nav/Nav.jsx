@@ -45,13 +45,14 @@ function Nav() {
               Charts 
             </Link>
 
+            <Link className="navLink" to="/about">
+              About
+            </Link>
+
             <LogOutButton className="navLink" />
           </>
         )}
 
-        <Link className="navLink" to="/about">
-          About
-        </Link>
       </div>
     </div>
   );
