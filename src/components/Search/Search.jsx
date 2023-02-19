@@ -9,8 +9,9 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
-    alignItems: "flex-start",
+    alignItems: "center",
     height: "100vh",
     backgroundColor: "#333",
   },
@@ -19,11 +20,10 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     borderRadius: "5px",
     color: "#fff",
-    alignSelf: "flex-start",
+    marginBottom: theme.spacing(2),
   },
   textField: {
     marginBottom: theme.spacing(2),
-    color: "white"
   },
   currentPriceContainer: {
     backgroundColor: "#333",
@@ -39,10 +39,6 @@ const Search = () => {
   const stockData = useSelector((store) => store.stockData.currentPrice);
   const dispatch = useDispatch();
   const [symbol, setSymbol] = useState("");
-  // const [currency, setCurrency] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [bought, setBought] = useState("");
-
   const classes = useStyles();
 
   const handleSubmit = (event) => {
@@ -60,7 +56,6 @@ const Search = () => {
       type: "SET_WATCHLIST",
       payload: symbol,
     });
-    console.log("THIS IS THE DISPATCH SET WATCLIST");
   };
 
   return (
@@ -74,6 +69,9 @@ const Search = () => {
             variant="outlined"
             className={classes.textField}
             fullWidth
+            InputProps={{
+              style: { color: "white" }
+            }}
           />
           <Button
             type="submit"
@@ -84,16 +82,20 @@ const Search = () => {
           </Button>
         </form>
       </Box>
-      <Box className={classes.currentPriceContainer}>
-        <h2>Current Price is: ${stockData}</h2>
-        <Button
-          variant="contained"
-          onClick={handleAddToWatchlist}
-          style={{ backgroundColor: "#FFA726" }}
-        >
-          Add to Watchlist
-        </Button>
-      </Box>
+      {stockData && (
+        <Box className={classes.currentPriceContainer}>
+          <h2 style={{ marginBottom: "16px" }}>
+            Current Price of {symbol} is : ${stockData}{" "}
+          </h2>
+          <Button
+            variant="contained"
+            onClick={handleAddToWatchlist}
+            style={{ backgroundColor: "#FFA726" }}
+          >
+            Add to Watchlist
+          </Button>
+        </Box>
+      )}
     </div>
   );
 };

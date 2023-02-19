@@ -9,6 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles({
+
   
   table: {
     backgroundColor: "orange",
@@ -18,13 +19,9 @@ const useStyles = makeStyles({
   tableCell: {
     padding: "5px 10px",
   },
-  deleteButton: {
+  buttons: {
     backgroundColor: "black",
     color: "white",
-  },
-  updateButton: {
-    backgroundColor: "white",
-    color: "black",
   },
 });
 
@@ -68,6 +65,7 @@ const Watchlist = () => {
   };
 
   return (
+    <div style={{ backgroundColor: "#333", minHeight: "100vh" }}>
     <Table className={classes.table}>
       <TableHead>
         <TableRow>
@@ -81,9 +79,10 @@ const Watchlist = () => {
       </TableHead>
       <TableBody>
         {watchlistArray.map((stock, index) => (
-          <TableRow key={index}
-          style={{ backgroundColor: stock.bought ? "green" : "inherit" }}
-        >
+          <TableRow
+            key={index}
+            style={{ backgroundColor: stock.bought ? "green" : "inherit" }}
+          >
             <TableCell className={classes.tableCell}>
               <img src={stock.logo} alt={`${stock.symbol} logo`} />
             </TableCell>
@@ -100,20 +99,29 @@ const Watchlist = () => {
               </a>
             </TableCell>
             <TableCell className={classes.tableCell}>
-              {stock.bought ? "True" : "False"}
-            </TableCell>
-            <TableCell className={classes.updateButton} >
-              <Button onClick={() => handleBought(stock.id)}>Bought</Button>
+              {stock.bought ? "Yes" : "No"}
             </TableCell>
             <TableCell className={classes.tableCell}>
               <Button
-                className={classes.deleteButton}
-                onClick={() => handleDelete(stock.id)}>SOLD</Button>
+                className={classes.buttons}
+                onClick={() => handleBought(stock.id)}
+              >
+                Buy
+              </Button>
+            </TableCell>
+            <TableCell className={classes.tableCell}>
+              <Button
+                className={classes.buttons}
+                onClick={() => handleDelete(stock.id)}
+              >
+                Sell
+              </Button>
             </TableCell>
           </TableRow>
         ))}
       </TableBody>
     </Table>
+    </div>
   );
 }
 

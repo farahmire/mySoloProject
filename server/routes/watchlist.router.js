@@ -1,5 +1,8 @@
 const express = require('express');
 const axios = require('axios');
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 require('dotenv').config()
 const pool = require('../modules/pool');
 
@@ -8,7 +11,7 @@ const BASE_URL = "https://finnhub.io/api/v1";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", rejectUnauthenticated, async (req, res) => {
   const symbol = req.body.symbol
   console.log("This is the symbol in GET route:", symbol)
 
@@ -39,7 +42,7 @@ router.get("/", async (req, res) => {
 });
 
 
-router.post("/", async (req, res) => {
+router.post("/", rejectUnauthenticated,  async (req, res) => {
     // console.log("this is req", req);
     console.log('this is POST route', req.body)
     try {
