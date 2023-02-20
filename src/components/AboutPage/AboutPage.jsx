@@ -9,13 +9,14 @@ import Avatar from '@mui/material/Avatar';
 function AboutPage() {
   return (
     <div className="container">
-      <div className="">
+     <div>
         <div>
+          {/* using material UI Avatar to bring in my profile pic and link my github/linkedIn  */}
         <Avatar label="Farah" alt="me" src="/images/mypic.png" sx={{ width: 80, height: 80 }}/>
-        <a href="https://github.com/farahmire" target="_blank" rel="noreferrer">
+        <a href="https://github.com/farahmire" target="_blank" >
           <img width={40}  src="/images/github.png"/>
         </a>
-        <a href="https://www.linkedin.com/in/farah-mire-634662181/" target="_blank" rel="noreferrer">
+        <a href="https://www.linkedin.com/in/farah-mire-634662181/" target="_blank" >
           <img width={40}  src="/images/linkedin.png"/>
         </a>
         <h4>Farah Mire - Full Stack Software Engineer</h4>
@@ -32,8 +33,8 @@ function AboutPage() {
         <h4> Technologies Used:</h4>
         <p> React - Node JS </p>
         <p>Express - JavaScript</p>
-        <p>PostgreSQL - Redux-Saga</p>
-        <p>Postman - MUI CSS - HTML</p>
+        <p>PostgreSQL - Redux/Saga</p>
+        <p>Postman - MUI - CSS - HTML</p>
         <p>API - Finnhub </p>
         <p>Charts - Highcharts JS</p>
         </div>
@@ -41,7 +42,7 @@ function AboutPage() {
           <h4>Special Thanks</h4>
           <p>
             🏫 Prime Digital Academy <br />
-            🧑‍🏫 Instructors: Matt, Kris, Key, & Vada <br />
+            🧑‍🏫 Instructors: Matt, Kris, Key, Kevin & Vada <br />
             🧑‍🎓 Vonnegut Cohort! <br />
             👨‍👩‍👦 Family & Friends 
           </p>

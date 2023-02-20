@@ -6,10 +6,15 @@ const {
 require('dotenv').config()
 const pool = require('../modules/pool');
 
-
+// shortned url so i can make the api call and then just call on BASE_URL in its place
 const BASE_URL = "https://finnhub.io/api/v1";
 
 const router = express.Router();
+
+// GET / - A route that retrieves the watchlist data for the authenticated user. 
+// The middleware function rejectUnauthenticated checks whether the user is authenticated 
+// before processing the request. The route retrieves the user's watchlist data from the database 
+// and returns it in the response body as a JSON object.
 
 router.get("/", rejectUnauthenticated, async (req, res) => {
   const symbol = req.body.symbol
@@ -42,6 +47,12 @@ router.get("/", rejectUnauthenticated, async (req, res) => {
 });
 
 
+// POST / - A route that adds a stock to the user's watchlist. 
+// The middleware function rejectUnauthenticated checks whether the user 
+// is authenticated before processing the request. The route sends a request to the Finnhub API 
+// to retrieve data for the stock symbol provided in the request body. The data is then inserted 
+// into the database as a new watchlist item.
+
 router.post("/", rejectUnauthenticated,  async (req, res) => {
     // console.log("this is req", req);
     console.log('this is POST route', req.body)
@@ -73,6 +84,11 @@ router.post("/", rejectUnauthenticated,  async (req, res) => {
     }
   });
 
+
+// DELETE /:id - A route that removes a stock from the user's watchlist. 
+// The route expects the watchlist item ID to be provided as a URL parameter. 
+// The route sends a SQL query to the database to delete the watchlist item with the given ID.
+
   router.delete("/:id", (req, res) => {
     const id = req.params.id;
     const sqlQuery = 
@@ -88,6 +104,11 @@ router.post("/", rejectUnauthenticated,  async (req, res) => {
         res.sendStatus(500);
       });
 });
+
+// PUT /:id - A route that updates a watchlist item to indicate that the user has bought the stock.
+//  The route expects the watchlist item ID to be provided as a URL parameter. 
+//  The route sends a SQL query to the database to update the bought column of the watchlist item 
+//  with the given ID to true.
 
 router.put("/:id", (req, res) => {
   const id = req.params.id;

@@ -30,6 +30,7 @@ const Watchlist = () => {
     (store) => store.fetchWatchlistReducer
   );
 
+  // allows the object of data to be made into an array to map through it 
   const watchlistArray = Object.values(fetchWatchlistReducer);
 
   console.log("this is fetchwatchlist reducer", fetchWatchlistReducer);
@@ -43,7 +44,7 @@ const Watchlist = () => {
     });
   }, []);
 
-
+// When delete button is pressed this deletes from DB and the dom using that specific ID
   const handleDelete = (stockId) => {
     dispatch({
       type: "DELETE_STOCK_FROM_WATCHLIST",
@@ -54,6 +55,7 @@ const Watchlist = () => {
     });
   };
 
+  // When update button is pressed this updates DB false to true and renders green on the dom using that specific ID
   const handleBought = (stockId) => {
     dispatch({
       type: "UPDATE_STOCK_FROM_WATCHLIST",
@@ -64,6 +66,7 @@ const Watchlist = () => {
     });
   };
 
+    // using material UI to render the table 
   return (
     <div style={{ backgroundColor: "#333", minHeight: "100vh" }}>
     <Table className={classes.table}>

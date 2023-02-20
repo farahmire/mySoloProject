@@ -54,6 +54,9 @@ const Chart = () => {
     timestamp: chartReducer.timestamp,
   };
 
+  // The component also uses useEffect to create a Highcharts chart that displays the retrieved stock data
+  //  in a hollow candlestick format. The useEffect hook takes an array of dependencies that includes the data
+  //   and chart state variables. When either of these variables changes, useEffect will re-render the chart.
   useEffect(() => {
     if (data.closePrice) {
       if (!chart) {
@@ -78,10 +81,18 @@ const Chart = () => {
                 color: Highcharts.getOptions().colors[0],
               },
             },
+            // The series property of the chart options object is an array of series that will be displayed on the chart.
+            // In this case, there is only one series, which is a hollow candlestick series. 
+            // The type property is set to "hollowcandlestick", which tells Highcharts to create a hollow candlestick chart.
             series: [
               {
                 type: "hollowcandlestick",
                 name: "Hollow Candlestick",
+                // The data property of the series is an array of arrays that contains the actual data that
+                // will be displayed on the chart. Each sub-array represents a single data point and has five elements: 
+                // the timestamp (in milliseconds since January 1, 1970), the opening price, the high price, the low price,
+                // and the closing price. These values are obtained from the chartReducer object,
+                // which is part of the application's Redux store.
                 data: data.timestamp.map((time, index) => {
                   return [                    
                     time * 1000,                    
